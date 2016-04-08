@@ -1,0 +1,199 @@
+/*
+ * 
+    https://api.flickr.com/services/rest/
+    https://api.flickr.com/services/soap/
+    https://api.flickr.com/services/xmlrpc/
+    https://up.flickr.com/services/upload/
+    https://up.flickr.com/services/replace/
+*/
+
+
+/**
+Public feed
+Returns a list of public content matching some criteria.
+
+URL 
+
+https://api.flickr.com/services/feeds/photos_public.gne
+
+Query string parameters
+
+id (Optional)
+    A single user ID. This specifies a user to fetch for.
+ids (Optional)
+    A comma delimited list of user IDs. This specifies a list of users to fetch for.
+tags (Optional)
+    A comma delimited list of tags to filter the feed by.
+tagmode (Optional)
+    Control whether items must have ALL the tags (tagmode=all), or ANY (tagmode=any) of the tags. Default is ALL.
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
+*/
+
+//Flickr.Feed().Photos(options).done(function(){});
+//Flickr.Feed().User(id).Photos(options).done(function(){});
+//Flickr.Feed().Users(ids).Photos(options).done(function(){});
+
+
+//Flickr.Feed().Photos(options).Tags(tags, any).done(function(){});
+//Flickr.Feed().User(id).Photos(options).Tags(tags, any).done(function(){});
+//Flickr.Feed().Users(ids).Photos(options).Tags(tags, any).done(function(){});
+
+// done!
+
+/**
+Friends' feed
+Returns a list of public content from the contacts, friends & family of a given person.
+*
+URL 
+
+https://api.flickr.com/services/feeds/photos_friends.gne
+
+Query string parameters
+
+user_id (Required)
+    The user ID of the user to fetch friends' photos and videos for.
+display_all (Optional)
+    Show multiple items for each contact (display_all=1), rather than one. Default is to show one per contact.
+friends (Optional)
+    Show content from only friends and family (friends=1), excluding contacts. Default is to show from all contacts.
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Defaults is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
+*/
+
+//Flickr.User(id).Friends(all).Photos(options).done(callback);
+
+// done!
+
+/**
+Favorite photos feed
+Returns a list of public favorites for a given user.
+
+URL 
+
+https://api.flickr.com/services/feeds/photos_faves.gne
+
+Query string parameters
+
+id
+    A single user ID. This specifies a user to fetch for.
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us).
+*/
+
+
+// Flickr.User(id).Favorites(options).done(callback);
+
+// done!
+
+/**
+Group discussions feed
+Returns a list of recent discussions in a given group.
+
+URL
+
+https://api.flickr.com/services/feeds/groups_discuss.gne
+
+Query string parameters
+
+id (Required)
+    The ID of the group to fetch discussions for.
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us).  
+*/
+
+// Flickr.Group(id).Discussions(options).done(callback);
+
+// done!
+
+/**
+Group pool feed
+
+Returns a list of things recently added to the pool of a given group.
+URL
+
+https://api.flickr.com/services/feeds/groups_pool.gne
+
+Query string parameters
+
+id (Required)
+    The ID of the group to fetch for.
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
+
+*/
+
+// Flickr.Group(id).Photos(options).done(callback);
+
+// done!
+
+/**
+Forum discussion feed
+Returns a list of recent topics from the forum.
+URL
+
+https://api.flickr.com/services/feeds/forums.gne
+
+Query string parameters
+
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
+*/
+
+// Flickr.Forum().Discussions(options).done(callback);
+
+// done!
+
+/**
+Recent activity on your photostream feed
+Returns a list of recent comments on photostream and sets belonging to a given user.
+URL
+
+https://api.flickr.com/services/feeds/activity.gne
+
+Query string parameters
+
+user_id (Required)
+    The user ID to fetch recent activity for.
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
+*/
+
+// Flickr.User(id).Activity(options).done(callback);
+
+// done, closed by flickr
+
+/**
+ *Recent comments you made feed
+Returns a list of recent comments that have been commented on by a given person.
+URL
+
+https://api.flickr.com/services/feeds/photos_comments.gne
+
+Query string parameters
+
+user_id (Required)
+    The user ID to fetch recent comments for.
+format (Optional)
+    The format of the feed. See the feeds page for feed format information. Default is Atom 1.0.
+lang (Optional)
+    The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
+*/
+
+// Flickr.User(id).Comments(options).done(callback);
+
+// done!

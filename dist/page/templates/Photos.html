@@ -1,0 +1,27 @@
+<h2>{{data.title}}</h2>
+
+{{#if tags}}
+<label>
+    Tags: 
+    <select class="" data-filter="tags">
+        <option value="">all</option>
+        {{#each tags}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+    </select>
+</label>
+{{/if}}
+
+{{#if users}}
+<label>
+    Users: 
+    <select class="{" data-filter="user">
+        <option value="">all</option>
+        {{#each users}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select>
+</label>
+{{/if}}
+<div class="flickr-items"></div>
+
