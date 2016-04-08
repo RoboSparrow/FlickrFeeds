@@ -4,6 +4,6 @@ Javascript sugar for [Flickr's Public Feeds](https://www.flickr.com/services/fee
 
 Work in progress - use at your own risk.
 
-Just grab the [flickr.js](dist/flickr.js) fromthe `dist` folder.
+Just grab the [flickr.js](dist/flickr.js) from inside the `dist` folder.
 
 Documentation comes soon.
