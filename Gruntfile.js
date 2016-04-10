@@ -5,23 +5,21 @@ module.exports = function(grunt) {
     ////
 
     var CONF = {
-
-        // task: concat
-        concat: {
-            // name slug for the concated js file (i.e app.js, app.css, app.min.js)
-            destSlug: 'flickr-feeds', //destSlug: 'app'
-            // debug: print src file paths as comments
-            printPath: true,
-            // glob patterns
-            files:{
-                js: [
-                    'src/Flickr.js', 
-                    'src/Flickr.View.js', 
-                    'src/Flickr.Controller.js'
+        dest:{
+            slug: 'flickr-feed'
+        },
+        files: {
+             lib: [
+                 'src/*.js', 
+             ],
+             examples:{
+                 js: [
+                    'src/examples/**/*.js', 
                 ],
                 css: [
-                    'src/Flickr.View.css'
-                ]
+                    'src/examples/**/*.css',
+                ],
+                
             }
         },
 
@@ -49,7 +47,9 @@ module.exports = function(grunt) {
     ////
 
     grunt.initConfig({
-
+        
+        CONF: CONF,
+        
         pkg: grunt.file.readJSON('package.json'),
 
         // banner
@@ -66,78 +66,30 @@ module.exports = function(grunt) {
 
         // concat files
         concat: {
-            // js
-            js:{
+            // lib
+            lib:{
                 options: {
                     separator: '\n',
-                    banner: '<%= meta.banner %>\n',
-                    process: function(src, filepath) {
-                        return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
-                    }
+                    banner: '<%= meta.banner %>\n'
                 },
-                src: CONF.concat.files.js,
-                dest: 'dist/' + CONF.concat.destSlug + '.js'
-            },
-            // css
-            css:{
-                options: {
-                    separator: '\n',
-                    banner: '<%= meta.banner %>\n',
-                    process: function(src, filepath) {
-                        return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
-                    }
-                },
-                src: CONF.concat.files.css,
-                dest: 'dist/' + CONF.concat.destSlug + '.css'
+                src: CONF.files.lib,
+                dest: 'dist/<%= CONF.dest.slug %>.js'
             }
         },
 
         // copy files
         copy: {
-            // js
-            vendorJs: {
+            // examples
+            examples: {
+                expand: true,
+                cwd: 'src/examples',
                 src: [
-                    // vendors
-                    'vendor/handlebars/handlebars.min.js'
+                    '**/*.js',
+                    '**/*.css',
+                    '**/*.html' 
                 ],
-                dest: 'dist/'
-            },
-            // css
-            vendorCss: {
-                src: [
-                    // vendors
-                ],
-                dest: 'dist/'
-            },
-            // js
-            js: {
-                expand: true,
-                cwd: 'src/',
-                src: ['**/*.js'],
-                dest: 'dist/'
-            },
-            // css
-            css: {
-                expand: true,
-                cwd: 'src/',
-                src: ['**/*.css'],
-                dest: 'dist/'
-            },
-            // html
-            html: {
-                expand: true,
-                cwd: 'src/',
-                src: ['**/*.html'],
-                dest: 'dist/'
-            },
-            // assets
-            assets: {
-                expand: true,
-                cwd: 'src/assets/',
-                src: ['**/*.*'],
-                dest: 'dist/assets/'
+                dest: 'dist/examples'
             }
-
         },
 
         // clean dist folder (before build)
@@ -154,11 +106,11 @@ module.exports = function(grunt) {
                     banner: '<%= meta.banner %>\n'
                 },
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
-                }
+                    'dist/<%= CONF.dest.slug %>.min.js': ['<%= concat.lib.dest %>']
+                },
             }
         },
-
+    
         // jshint: specify your preferred options in 'globals'
         // http://jshint.com/docs/options/
         jshint: {
@@ -170,31 +122,11 @@ module.exports = function(grunt) {
         watch: {
             files: ['<%= jshint.files %>', 'src/**/*.css', 'src/**/*.html'],
             tasks: [
-                'jshint', 
-                //'concat', 
-                'copy', 
-                //'replace'
+                'jshint',
+                'concat',
+                'copy',
+                'uglify'
             ]
-        },
-
-        // string replacments
-        replace: {
-            // index.html
-            'index.html': {
-                options: {
-                    patterns: [{
-                        match: 'package',
-                        replacement: '<%= pkg.name %>'
-                    }, {
-                        match: 'version',
-                        replacement: '<%= pkg.version %>'
-                    }]
-                },
-                files: [{
-                    src: ['dist/index.html'],
-                    dest: 'dist/index.html'
-                }]
-            }
         }
 
     }); // end grunt.initConfig
@@ -219,11 +151,9 @@ module.exports = function(grunt) {
         'Compiles all of the assets and copies the files to the build directory.', [
             'clean',
             'jshint',
-            //'concat',
-            'copy'
-            //'min'
-            //'replace',
-            //'uglify'
+            'concat',
+            'copy',
+            'uglify'
         ]
     );
 

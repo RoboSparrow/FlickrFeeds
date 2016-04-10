@@ -32,17 +32,6 @@ lang (Optional)
     The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
 */
 
-//Flickr.Feed().Photos(options).done(function(){});
-//Flickr.Feed().User(id).Photos(options).done(function(){});
-//Flickr.Feed().Users(ids).Photos(options).done(function(){});
-
-
-//Flickr.Feed().Photos(options).Tags(tags, any).done(function(){});
-//Flickr.Feed().User(id).Photos(options).Tags(tags, any).done(function(){});
-//Flickr.Feed().Users(ids).Photos(options).Tags(tags, any).done(function(){});
-
-// done!
-
 /**
 Friends' feed
 Returns a list of public content from the contacts, friends & family of a given person.
@@ -65,10 +54,6 @@ lang (Optional)
     The display language for the feed. See the feeds page for feed language information. Default is US English (en-us). 
 */
 
-//Flickr.User(id).Friends(all).Photos(options).done(callback);
-
-// done!
-
 /**
 Favorite photos feed
 Returns a list of public favorites for a given user.
@@ -86,11 +71,6 @@ format (Optional)
 lang (Optional)
     The display language for the feed. See the feeds page for feed language information. Default is US English (en-us).
 */
-
-
-// Flickr.User(id).Favorites(options).done(callback);
-
-// done!
 
 /**
 Group discussions feed

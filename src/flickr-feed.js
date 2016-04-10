@@ -57,7 +57,7 @@
         });
     };
     
-    var tagArray = function(tags){
+    var toArray = function(tags){
         tags = tags || [];
         if(typeof tags === 'string'){
             if(tags.indexOf(',') > -1){
@@ -164,11 +164,11 @@
     };
 
     DataItem.prototype.getTags = function(){
-        return tagArray(this.tags);
+        return toArray(this.tags);
     };
     
     DataItem.prototype.hasTags = function(tags){
-        tags = tagArray(tags);
+        tags = toArray(tags);
         var itemTags = this.getTags(tags);
         return arrayIntersect(tags, itemTags).length;
     };
@@ -272,6 +272,12 @@
         return this;
     };
     
+    /**
+     * User Friends feed
+     * @param{bool} multiple Show multiple items for each contact
+     * @param{bool} friends Show content from only friends and family, excluding contacts
+     */
+     
     Feed.prototype.Friends = function(displayMultiple, friends){
         this.options({
             display_all: displayMultiple || false,
@@ -300,7 +306,7 @@
     // users 
     
     Feed.prototype.Users = function(ids){
-        ids = ids || [];
+        ids = toArray(ids);
         this.options({ids: ids});
         return this;
     };
@@ -341,7 +347,7 @@
      */
      
     Feed.prototype.Tags = function(tags, all){
-        tags = tagArray(tags);
+        tags = toArray(tags);
         all = all || false;
      
         this.options({
@@ -361,4 +367,3 @@
     window.Flickr = Flickr;
     
 }(window));
-

@@ -40,7 +40,7 @@
                 var search = e.target.value;
                 items = (search) ? filters[filter](data.items, search) : data.items;
 
-                View.getTemplate('page/templates/Photos.Items.html', {items: items}, function(html){                
+                View.getTemplate('./templates/Photos.Items.html', {items: items}, function(html){                
                     photos.innerHTML = html;
                 });
             });
@@ -95,10 +95,10 @@
             users: (options.filters.indexOf('user') > -1) ? data.getUsers() : false
         };
         
-        this.getTemplate('page/templates/Photos.html', photosData, function(html){
+        this.getTemplate('./templates/Photos.html', photosData, function(html){
             node.insertAdjacentHTML('beforeend', html);
             
-            self.getTemplate('page/templates/Photos.Items.html', {items: data.items}, function(html){
+            self.getTemplate('./templates/Photos.Items.html', {items: data.items}, function(html){
                 var itemsNode = node.querySelector('.flickr-items');
                 itemsNode.innerHTML = html;
                 View.filterHandler(data, node);
@@ -124,10 +124,10 @@
             users: (options.filters.indexOf('user') > -1) ? data.getUsers() : false
         };
         
-        this.getTemplate('page/templates/Comments.html', commentsData, function(html){
+        this.getTemplate('./templates/Comments.html', commentsData, function(html){
             node.insertAdjacentHTML('beforeend', html);
             
-            self.getTemplate('page/templates/Comments.Items.html', {items: data.items}, function(html){
+            self.getTemplate('./templates/Comments.Items.html', {items: data.items}, function(html){
                 var itemsNode = node.querySelector('.flickr-items');
                 itemsNode.innerHTML = html;
                 View.filterHandler(data, node);

@@ -1,5 +1,5 @@
 {
-  "name": "FlicrFeeds",
+  "name": "FlickrFeeds",
   "private": true,
   "main": [],
   "license": "",
@@ -11,6 +11,5 @@
     "tests"
   ],
   "dependencies": {
-    "handlebars": "~4.0.5"
   }
 }
