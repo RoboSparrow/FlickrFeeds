@@ -1,3 +1,9 @@
+/**
+ * FlicrFeeds - v0.0.1 - 2016-04-10
+ * Copyright (c) 2016 
+ * Licensed MIT <https://opensource.org/licenses/MIT>
+ */
+
 /* jshint es3: true */
 
 (function(window){
@@ -367,3 +373,4 @@
     window.Flickr = Flickr;
     
 }(window));
+

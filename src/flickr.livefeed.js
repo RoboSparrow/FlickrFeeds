@@ -18,8 +18,11 @@
         },
         init: function(contentNode, controlsNode){
             this.nodes.parent = document.createElement('section');
+            this.nodes.parent.className = 'flickr-items';
+            
             this.nodes.counter = document.createElement('span');
             this.nodes.counter.textContent = 'fetching...';
+            
             this.nodes.container = document.createElement('div');   
             
             this.nodes.parent.appendChild(this.nodes.container);
@@ -87,7 +90,7 @@
         }
         
         count++;           
-        View.nodes.counter.textContent = 'Next: ' + (WAIT - count) +'s';
+        View.nodes.counter.textContent = 'next update: ' + (WAIT - count) +'s';
         console.log(timer);
     };
     
