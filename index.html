@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang=en-us>
+    <head><meta charset=utf-8>
+        <title>Flickr Heartbeet</title>
+        <meta name="description" content="Javascript sugar for Flickr's Public Feeds (JsonP).">
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+        <style type="text/css">
+            
+            nav.fixed.top {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 9999;
+                width: 100%;
+                height: auto;
+                background-color: #00a087;
+                color: white;
+                text-align:center;
+                
+            }
+            .pure-menu-link{
+                color: white;
+            }
+            .pure-menu-link:hover{
+                background-color:transparent;
+            }
+            body {
+                padding-top: 75px;
+            }
+            
+            figure{
+                display:inline-block;
+                animation-name: hello;
+                animation-duration: 2s;
+            }
+            figure.bye {
+                transform: scale(0);
+                animation-name: bye;
+                animation-duration: 1s;
+                animation-iteration-count: 1;
+            }
+            @keyframes hello {
+                from {transform: scale(0);}
+                to {transform: scale(1);}
+            }
+            @keyframes bye {
+                from {transform: scale(1);}
+                to {transform: scale(0);}
+            }
+        </style>
+        <script src="./dist/flickr-feed.js"></script>
+        <script src="./dist/examples/flickr.livefeed.js"></script>
+        
+    </head>
+
+    <body>
+
+        <nav class="pure-menu pure-menu-horizontal fixed top">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><span id="Controls" class="pure-menu-link"></span></li>
+            </ul>
+        </nav>
+  
+        <main id="Content"></main>
+    </body>
+
+</html>
