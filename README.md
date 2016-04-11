@@ -8,7 +8,7 @@ Work in progress - use at your own risk.
 
 Just grab the `flickr-feed.js` or `flickr-feed.min.js` from [the **dist** folder](dist/flickr.js).
 
-## Why Feeds? Flickr has an API!
+## Why Feeds? Flickr has a great API!
 
 Yeah, but you need either oAuth or an api key, which makes it neccessary to pipe your requests through a server-side proxy.
 Via the public feeds you can access (limited) data without either of them.
