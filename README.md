@@ -4,7 +4,14 @@ Javascript sugar for [Flickr's Public Feeds](https://www.flickr.com/services/fee
 
 Work in progress - use at your own risk.
 
+## Get it
+
 Just grab the `flickr-feed.js` or `flickr-feed.min.js` from [the **dist** folder](dist/flickr.js).
+
+## Why Feeds? Flickr has an API!
+
+Yeah, but you need either oAuth or an api key, which makes it neccessary to pipe your requests through a server-side proxy.
+Via the public feeds you can access (limited) data without either of them.
 
 @TODO: document .raw() and Data/DataItem methods
 
