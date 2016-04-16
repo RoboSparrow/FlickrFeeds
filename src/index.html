@@ -18,14 +18,18 @@
                 z-index: 9999;
                 width: 100%;
                 height: auto;
-                background-color: #00a087;
+                background-color: rgb(0, 160, 135);
                 color: white;    
             }
             .pure-menu-link{
                 color: white;
             }
             .pure-menu-link:hover{
-                background-color:transparent;
+                background-color: orange;
+            }
+            .pure-menu-heading{
+                text-transform: none;
+                background-color: rgb(25, 25, 25);
             }
             body {
                 padding-top: 75px;
@@ -63,12 +67,10 @@
     <body>
 
         <nav class="pure-menu pure-menu-horizontal fixed top">
+            <a class="pure-menu-link github pure-menu-heading" href="https://github.com/RoboSparrow/FlickrFeeds">
+                <i class="fa fa-github"></i> Github
+            </a>
             <ul class="pure-menu-list">
-                <li class="pure-menu-item">
-                    <a class="pure-menu-link github" href="https://github.com/RoboSparrow/FlickrFeeds">
-                        <i class="fa fa-github"></i>
-                    </a>
-                </li>
                 <li class="pure-menu-item">
                     <span id="Controls" class="pure-menu-link"></span>
                 </li>

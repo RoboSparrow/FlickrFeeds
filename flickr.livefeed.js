@@ -21,7 +21,7 @@
             this.nodes.parent.className = 'flickr-items';
             
             this.nodes.counter = document.createElement('span');
-            this.nodes.counter.textContent = 'fetching...';
+            this.nodes.counter.textContent = 'Fetching feed...';
             
             this.nodes.container = document.createElement('div');   
             
@@ -67,7 +67,7 @@
     
     var clearInterval = function(){ 
         count = 0;
-        View.nodes.counter.textContent = 'fetching...';
+        View.nodes.counter.textContent = 'Fetching feed...';
         if(timer){
             window.clearInterval(timer);
         }
@@ -90,7 +90,7 @@
         }
         
         count++;           
-        View.nodes.counter.textContent = 'next update: ' + (WAIT - count) +'s';
+        View.nodes.counter.textContent = 'Next update: ' + (WAIT - count) +'s';
         console.log(timer);
     };
     
