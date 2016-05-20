@@ -17,6 +17,8 @@ Via the public feeds you can access (limited) data without either of them.
 
 # Feed API
 
+The Feed API builds your requests
+
 ## Public: Photos
 
 Returns a list of public content matching some criteria.
@@ -187,3 +189,125 @@ Flickr.Feed().Forums().ready(function(data){
     console.log(data);
 });
 ```
+
+## Response data modifiers
+
+### Raw responses
+
+By default the Flickr response objects are decorated with some helper methods before returning it to your callback. (see *Data and DataItem API*)
+If you don't care about these helpers then you can disable this by attaching the `.raw()` modifier to your request.
+
+```
+// disable Data and DataItem API
+Flickr.Feed().Photos().raw().ready(function(data){
+    console.log(data); // pure Flickr response
+});
+```
+
+# Data and DataItem API
+
+The Data and DataItem API provides some convenience methods for handling the Flickr response object.
+
+The data properties returned from Flickr remain untouched but you can use these methods to filter and parse result properties. 
+
+* Note: if you don't care about these helpers then you can disable this by attaching the `.raw()` modifier to your request.
+
+## Example 
+
+Structure of photo stream response with decorators
+
+```
+{
+    /**
+     * Data API: Filters for Flickr items
+     * this.getItemsByTags()
+     * this.getTags()
+     * this.getUsers()
+     */
+     
+    "title": "<title>",
+    "link": "<url>",
+    "description": "<text>",
+    "modified": "<iso-date>",
+    "generator": "http://www.flickr.com/",
+    "items": [
+        {
+            
+            /**
+             * DataItem API: Helpers for item values
+             *
+             * this.getDatePublished()
+             * this.getDateTaken()
+             * this.getImage()
+             * this.hasTags()
+             * this.getTags()
+             * this.getUser()
+             */
+             
+			"title": "<title>",
+			"link": "<url>",
+			"media": {"m":"<url>"},
+			"date_taken":  "<iso-date>",
+            "published": "<iso-date>"
+			"description": "<description-html>",
+			"author": "nobody@flickr.com (<user-name>)",
+			"author_id": "<user-id>",
+			"tags": "<whitespace separated tagnames>"
+        },
+        // ...more items...
+    ]
+    
+}
+```
+
+### Handling Filters
+
+```
+Flickr.Feed().Photos().ready(function(data){
+   
+    // get normalised array with all tags in items
+    var allTags = data.getTags();
+    
+    // get filtered array of items for specific tags
+    // we assume that allTags contained the tags 'dog' and 'cat'
+    var dogs = data.getItemsByTag('dog');
+    var dogsCats =  data.getItemsByTag(['dog', 'cat']);
+    var dogsCats =  data.getItemsByTag('dog cat');
+    var dogsCats =  data.getItemsByTag('dog, cat');
+    
+    // get normalised array with all users in items
+    var users = data.getUsers();
+
+});
+```
+
+### Handling Items
+
+```
+Flickr.Feed().Photos().ready(function(data){
+   
+    var item = data.items[0];
+    
+    // return item.published as JS Date object
+    var date = item.getDatePublished();
+    
+    // return item.date_taken as JS Date object
+    var date = item.getDateTaken();
+    
+    // return item image url
+    var imageUrl = item.getImage();
+        
+    // return tags length
+    var numberOfTags = item.hasTags();
+    // or:
+    if(item.hasTags()){
+        //do something...
+    }
+    
+    // return tags as array
+    var tags = item.getTags();
+    
+});
+```
+
+
