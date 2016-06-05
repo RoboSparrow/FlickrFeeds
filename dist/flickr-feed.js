@@ -1,5 +1,5 @@
 /**
- * FlickrFeeds - v0.0.1 - 2016-04-13
+ * FlickrFeeds - v0.0.1 - 2016-06-05
  * Copyright (c) 2016 
  * Licensed MIT <https://opensource.org/licenses/MIT>
  */
@@ -22,20 +22,18 @@
         return (query.length) ? endpoint + '?' + query.join("&") : url;
     };
 
-    var jsonp = function(endpoint, query, fn, raw){
+    var jsonp = function(endpoint, query, fn, state){
         query = query || {};
         var callback;
         var script= document.createElement('script');
 
-        // callback
-        if(raw){
-            callback = fn;
-        }else{
-            callback = function(data){
-                fn(new Data(data));
-                document.head.removeChild(script);
-            };
-        }
+        callback = function(data){
+            if(state.inject){
+                    data.injected = state.inject;
+            }
+            fn((state.raw) ? data : new Data(data));  
+            document.head.removeChild(script);
+        };
         callbacks.push(callback);
 
         // default options
@@ -101,6 +99,7 @@
                 }
             }
         }
+
     };
 
     Data.prototype.getUsers = function(){
@@ -192,9 +191,12 @@
     ////
 
     var Feed = function(id){
+        this.state = {
+            raw: false,
+            inject: false
+        };
         this.query = {};
         this.id = id;
-        this.raw = false;
         this.feed = null;
         this.endpoint = null;
         this.callback = function(data){};//?
@@ -248,14 +250,19 @@
     };
 
     Feed.prototype.raw = function(){
-        this.raw = true;
+        this.state.raw = true;
+        return this;
+    };
+
+    Feed.prototype.inject = function(obj){
+        this.state.inject = obj;
         return this;
     };
 
     ///<title>(.*?)<\/title>/.exec(str)
     Feed.prototype.ready = function(fn){
         var query = this.prepareQuery();
-        jsonp(this.feed, query, fn, this.raw);
+        jsonp(this.feed, query, fn, this.state);
         return this;
     };
 

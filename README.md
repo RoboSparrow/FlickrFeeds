@@ -192,6 +192,7 @@ Flickr.Feed().Forums().ready(function(data){
 
 ## Response data modifiers
 
+
 ### Raw responses
 
 By default the Flickr response objects are decorated with some helper methods before returning it to your callback. (see *Data and DataItem API*)
@@ -203,6 +204,23 @@ Flickr.Feed().Photos().raw().ready(function(data){
     console.log(data); // pure Flickr response
 });
 ```
+
+### Injectors
+
+You can inject data (i.e state values) as objects into the response to have them available on callback.
+
+This is done by attaching the `.raw(myObject)` modifier which then creates the `injected` holding your stateData inside the response.
+
+```
+// inject state data
+Flickr.Feed().Photos().inject({ start: performance.now() }).ready(function(data){
+    var end = performance.now();
+    console.log('This request took' + (end - data.injected.start) + 'ms');  // pure Flickr response
+});
+```
+
+Injection also works with the `.raw()` modifier set (for debugging).
+
 
 # Data and DataItem API
 
