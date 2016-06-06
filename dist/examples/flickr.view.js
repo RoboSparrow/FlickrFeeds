@@ -74,6 +74,50 @@
     };
     
     ////
+    // Menu
+    ////
+    
+    View.Menu = {
+        data: [],
+        
+        build: function(node){
+           View.getTemplate('./templates/Menu.html', {data: this.data}, function(html){
+                node.innerHTML = html;
+            });
+        },
+        
+        section: function(title){
+            var section = {
+                title: title,
+                items: []
+            };
+            this.data.push(section);
+            return section;
+        },
+        
+        item: function(section, hash, title){
+            var item = {
+                hash: hash,
+                title: title
+            };
+            section.items.push(item);
+            return item;
+        },
+        
+        update: function(item){
+            item = item || null;
+            var items = this.node.querySelectorAll('.active');
+            for(var i = 0; i < items.length; i++){
+                items[i].className = '';
+            }
+            if(item){
+                item.className = 'active';
+            }
+            return item;
+        }
+    };
+    
+    ////
     // View
     ////
     
@@ -85,9 +129,9 @@
         
         var node = document.createElement('div');
         node.className = 'flickr-photo-grid';
-        parent.appendChild(node);
         
-        var className;
+        parent.innerHTML = '';
+        parent.appendChild(node);
         
         var photosData = {
             data: data,
@@ -115,6 +159,8 @@
         
         var node = document.createElement('div');
         node.className = 'flickr-photo-comments';
+        
+        parent.innerHTML = '';
         parent.appendChild(node);
         
         var className;
@@ -134,6 +180,11 @@
             });
         });
  
+    };
+ 
+    
+    View.loading = function(parent){
+        parent.innerHTML = '<em>loading...</em>';
     };
  
     Flickr.View = View;

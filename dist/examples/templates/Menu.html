@@ -1,0 +1,14 @@
+<div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+        {{#each data}}
+        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a href="#" class="pure-menu-link">{{title}}</a>
+            <ul class="pure-menu-children">
+                {{#each items}}
+                <li class="pure-menu-item"><a href="#{{hash}}" class="pure-menu-link">{{title}}</a></li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/each}}
+    </ul>
+</div>
