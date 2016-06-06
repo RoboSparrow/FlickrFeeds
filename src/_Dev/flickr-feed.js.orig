@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+/**
+ * FlicrFeeds - v0.0.1 - 2016-04-10
+ * Copyright (c) 2016 
+ * Licensed MIT <https://opensource.org/licenses/MIT>
+ */
+
+/* jshint es3: true */
+
+(function(window){
+     
+    'use strict';
+    
+    var document = window.document;
+    
+    var callbacks = [];
+    
+=======
 /* jshint es3: true */
 
 (function(window){
@@ -8,6 +26,7 @@
 
     var callbacks = [];
 
+>>>>>>> master
     var url = function(endpoint, args) {
         var query = [];
         for(var key in args){
@@ -15,6 +34,25 @@
         }
         return (query.length) ? endpoint + '?' + query.join("&") : url;
     };
+<<<<<<< HEAD
+    
+    var jsonp = function(endpoint, query, fn, raw){
+        query = query || {};
+        var callback;
+        var script= document.createElement('script');
+        
+        // callback
+        if(raw){
+            callback = fn;
+        }else{
+            callback = function(data){
+                fn(new Data(data));
+                document.head.removeChild(script);
+            };
+        }
+        callbacks.push(callback);
+        
+=======
 
     var jsonp = function(endpoint, query, fn, state){
         query = query || {};
@@ -30,13 +68,18 @@
         };
         callbacks.push(callback);
 
+>>>>>>> master
         // default options
         query.format = 'json';
         query.jsoncallback = 'Flickr.callbacks[' + (callbacks.length -1) +']';
 
         script.src = url(endpoint, query);
         document.head.appendChild(script);
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> master
         return script;
     };
 
@@ -48,13 +91,21 @@
             return p;
         }, []);
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     var arrayIntersect = function (a, b){
         return a.filter(function(n) {
             return b.indexOf(n) != -1;
         });
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     var toArray = function(tags){
         tags = tags || [];
         if(typeof tags === 'string'){
@@ -66,11 +117,19 @@
         }
         return tags;
     };
+<<<<<<< HEAD
+    
+    ////
+    // Feed Data
+    ////
+    
+=======
 
     ////
     // Feed Data
     ////
 
+>>>>>>> master
     var Data = function(data){
         this.error = false;
 
@@ -78,7 +137,11 @@
             var title = /<title>(.*?)<\/title>/.exec(data);
             this.error = (title) ? title : data;
         }
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> master
         if(!this.error){
             for(var key in data){
                 if(data.hasOwnProperty(key)){
@@ -93,11 +156,18 @@
                 }
             }
         }
+<<<<<<< HEAD
+    };
+    
+    Data.prototype.getUsers = function(){
+        
+=======
 
     };
 
     Data.prototype.getUsers = function(){
 
+>>>>>>> master
         var sort = function(a, b){
             if (a.name < b.name){
                 return -1;
@@ -107,23 +177,41 @@
             }
             return 0;
         };
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> master
         var users = [];
         for(var i = 0; i < this.items.length; i++){
             users.push(this.items[i].getUser());
         }
+<<<<<<< HEAD
+        
+        return users.sort(sort);
+    };
+    
+=======
 
         return users.sort(sort);
     };
 
+>>>>>>> master
     Data.prototype.getTags = function(data){
         var tags = [];
         for(var i = 0; i < this.items.length; i++){
             tags = tags.concat(this.items[i].getTags());
+<<<<<<< HEAD
+        } 
+        return arrayUnique(tags).sort();
+    };
+    
+=======
         }
         return arrayUnique(tags).sort();
     };
 
+>>>>>>> master
     Data.prototype.getItemsByTags = function(tags){
         var items = [];
         for(var i = 0; i < this.items.length; i++){
@@ -134,11 +222,19 @@
         }
         return items;
     };
+<<<<<<< HEAD
+    
+    ////
+    // Feed Data Item
+    ////
+    
+=======
 
     ////
     // Feed Data Item
     ////
 
+>>>>>>> master
     var DataItem = function(item){
         for(var key in item){
             if(item.hasOwnProperty(key)){
@@ -148,16 +244,27 @@
     };
 
     DataItem.prototype.getUser = function(){
+<<<<<<< HEAD
+        
+        var regExp = /\(([^)]+)\)/;
+        var matches = regExp.exec(this.author);
+        
+=======
 
         var regExp = /\(([^)]+)\)/;
         var matches = regExp.exec(this.author);
 
+>>>>>>> master
         return {
             id: this.author_id,
             name: (matches && matches.length > 0) ? matches[1] : this.author
         };
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     DataItem.prototype.getImage = function(){
         return (this.hasOwnProperty('media') && this.media.hasOwnProperty('m')) ? this.media.m : null;
     };
@@ -165,12 +272,35 @@
     DataItem.prototype.getTags = function(){
         return toArray(this.tags);
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     DataItem.prototype.hasTags = function(tags){
         tags = toArray(tags);
         var itemTags = this.getTags(tags);
         return arrayIntersect(tags, itemTags).length;
     };
+<<<<<<< HEAD
+    
+    DataItem.prototype.getDatePublished = function(){
+        return (this.hasOwnProperty('published')) ? new Date(this.published) : null;
+    };
+    
+    DataItem.prototype.getDateTaken = function(){
+        return (this.hasOwnProperty('date_taken')) ? new Date(this.date_taken) : null;
+    };
+    
+    ////
+    // Feed
+    ////
+    
+    var Feed = function(id){
+        this.query = {};
+        this.id = id;
+        this.raw = false;
+=======
 
     DataItem.prototype.getDatePublished = function(){
         return (this.hasOwnProperty('published')) ? new Date(this.published) : null;
@@ -191,34 +321,58 @@
         };
         this.query = {};
         this.id = id;
+>>>>>>> master
         this.feed = null;
         this.endpoint = null;
         this.callback = function(data){};//?
         return this;
     };
+<<<<<<< HEAD
+    
+    Feed.prototype.options = function(options){
+        options = options || {};
+        for (var key in options) {
+	        if(options.hasOwnProperty(key)){
+=======
 
     Feed.prototype.options = function(options){
         options = options || {};
         for (var key in options) {
             if(options.hasOwnProperty(key)){
+>>>>>>> master
                 if(this.query.hasOwnProperty(key)){
                     continue;
                 }
                 this.query[key] = options[key];
             }
+<<<<<<< HEAD
+	    }
+    };
+    
+=======
         }
     };
 
+>>>>>>> master
     Feed.prototype.register = function(feed){
         this.feed = feed;
         this.id = feed.substr(feed.lastIndexOf('/') + 1);
     };
+<<<<<<< HEAD
+    
+    Feed.prototype.prepareQuery = function(){
+       
+        // copy
+        var query = JSON.parse(JSON.stringify(this.query));
+        
+=======
 
     Feed.prototype.prepareQuery = function(){
 
         // copy
         var query = JSON.parse(JSON.stringify(this.query));
 
+>>>>>>> master
         // user_id
         switch(this.id){
             case 'activity.gne':
@@ -228,17 +382,45 @@
                 delete(query.id);
             break;
         }
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> master
         // user ids
         if(typeof query.ids !== 'undefined'){
             query.ids = arrayUnique(query.ids).join(',');
         }
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> master
         // tags
         if(typeof query.tags !== 'undefined'){
             var tags = arrayUnique(query.tags);
             query.tags = tags.join(',');
         }
+<<<<<<< HEAD
+        
+        return query;
+    };
+    
+    Feed.prototype.raw = function(){
+        this.raw = true;
+        return this;
+    };
+    
+    ///<title>(.*?)<\/title>/.exec(str)
+    Feed.prototype.ready = function(fn){
+        var query = this.prepareQuery();
+        jsonp(this.feed, query, fn, this.raw);
+        return this;
+    };
+    
+    // photos 
+    
+=======
 
         return query;
     };
@@ -262,6 +444,7 @@
 
     // photos
 
+>>>>>>> master
     Feed.prototype.Photos = function(options){
         options = options || false;
         // public
@@ -271,20 +454,34 @@
         this.options(options);
         return this;
     };
+<<<<<<< HEAD
+    
+    // user
+    
+=======
 
     // user
 
+>>>>>>> master
     Feed.prototype.User = function(id){
         this.options({id: id});
         return this;
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     /**
      * User Friends feed
      * @param{bool} multiple Show multiple items for each contact
      * @param{bool} friends Show content from only friends and family, excluding contacts
      */
+<<<<<<< HEAD
+     
+=======
 
+>>>>>>> master
     Feed.prototype.Friends = function(displayMultiple, friends){
         this.options({
             display_all: displayMultiple || false,
@@ -294,83 +491,149 @@
         this.register('https://api.flickr.com/services/feeds/photos_friends.gne');
         return this;
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     Feed.prototype.Favourites = function(){
         this.register('https://api.flickr.com/services/feeds/photos_faves.gne');
         return this;
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     Feed.prototype.Activity = function(){
         this.register('https://api.flickr.com/services/feeds/activity.gne');
         return this;
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     Feed.prototype.Comments = function(){
         this.register('https://api.flickr.com/services/feeds/photos_comments.gne');
         return this;
     };
+<<<<<<< HEAD
+    
+    // users 
+    
+=======
 
     // users
 
+>>>>>>> master
     Feed.prototype.Users = function(ids){
         ids = toArray(ids);
         this.options({ids: ids});
         return this;
     };
+<<<<<<< HEAD
+    
+    // Group
+    
+=======
 
     // Group
 
+>>>>>>> master
     Feed.prototype.Group = function(id){
         id = id || [];
         this.options({id: id});
         return this;
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     Feed.prototype.Discussion = function(){
         this.register('https://api.flickr.com/services/feeds/groups_discuss.gne');
         return this;
     };
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> master
     Feed.prototype.Pool = function(){
         this.register('https://api.flickr.com/services/feeds/groups_pool.gne');
         return this;
     };
+<<<<<<< HEAD
+    
+    // Forums
+    
+=======
 
     // Forums
 
+>>>>>>> master
     Feed.prototype.Forums = function(){
         this.register('https://api.flickr.com/services/feeds/forums.gne');
         return this;
     };
+<<<<<<< HEAD
+    
+    /**
+     * Accepts a list of tags as either 
+     * - an array, 
+=======
 
     /**
      * Accepts a list of tags as either
      * - an array,
+>>>>>>> master
      * - a comma-separated string
      * - a white-pace spearated string (being item.tag feed response format)
      * @param {array|string} tags
      * @param {boolean} any sets 'tagmode' feed param ('ANY'| 'ALL'), see Flickr feedc docs
      * @returns {object} this
      */
+<<<<<<< HEAD
+     
+    Feed.prototype.Tags = function(tags, all){
+        tags = toArray(tags);
+        all = all || false;
+     
+=======
 
     Feed.prototype.Tags = function(tags, all){
         tags = toArray(tags);
         all = all || false;
 
+>>>>>>> master
         this.options({
             tags: tags,
             tagmode: (all) ? 'ALL' : 'ANY'
         });
         return this;
     };
+<<<<<<< HEAD
+    
+    var Flickr = {    
+=======
 
     var Flickr = {
+>>>>>>> master
         callbacks: callbacks,
         Feed: function(options){
             return new Feed(options);
         }
     };
+<<<<<<< HEAD
+    
+    window.Flickr = Flickr;
+    
+}(window));
+
+=======
 
     window.Flickr = Flickr;
 
 }(window));
+>>>>>>> master

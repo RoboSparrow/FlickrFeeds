@@ -1,0 +1,10 @@
+<div class="pure-g">
+    {{#each items}}
+    <div class="flickr-item pure-u-md-1-1">
+        <h4><a href="{{link}}" target="_blank">{{title}}</a></h4>
+        <p>{{{description}}}</p>
+        <br>user: <em class="user">{{#with getUser}}{{name}}{{/with}}</em>
+        <br>pubished: <em class="taken">{{#with getDatePublished}}{{toLocaleDateString}}{{/with}}</em>            
+    </div>
+    {{/each}}
+</div>

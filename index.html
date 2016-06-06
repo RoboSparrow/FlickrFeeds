@@ -9,58 +9,10 @@
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <style type="text/css">
-            
-            nav.fixed.top {
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 9999;
-                width: 100%;
-                height: auto;
-                background-color: rgb(0, 160, 135);
-                color: white;    
-            }
-            .pure-menu-link{
-                color: white;
-            }
-            .pure-menu-link:hover{
-                background-color: orange;
-            }
-            .pure-menu-heading{
-                text-transform: none;
-                background-color: rgb(25, 25, 25);
-            }
-            body {
-                padding-top: 75px;
-            }
-            
-            .flickr-items{
-                text-align: center;
-            }
-            figure{
-                display:inline-block;
-                animation-name: hello;
-                animation-duration: 2s;
-                margin: 1em;
-            }
-            figure.bye {
-                transform: scale(0);
-                animation-name: bye;
-                animation-duration: 1s;
-                animation-iteration-count: 1;
-            }
-            @keyframes hello {
-                from {transform: scale(0);}
-                to {transform: scale(1);}
-            }
-            @keyframes bye {
-                from {transform: scale(1);}
-                to {transform: scale(0);}
-            }
-        </style>
-        <script src="./flickr-feed.js"></script>
-        <script src="./flickr.livefeed.js"></script>
+        
+        <link rel="stylesheet" href="./dist/examples/flickr.view.css">
+        <script src="./dist/flickr-feed.js"></script>
+        <script src="./dist/examples/flickr.livefeed.js"></script>
         
     </head>
 

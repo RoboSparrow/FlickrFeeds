@@ -91,7 +91,6 @@
         
         count++;           
         View.nodes.counter.textContent = 'Next update: ' + (WAIT - count) +'s';
-        console.log(timer);
     };
     
     

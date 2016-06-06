@@ -10,6 +10,10 @@ module.exports = function(grunt) {
         },
         files: {
              lib: [
+<<<<<<< HEAD
+                 'src/**/*.js', 
+             ]
+=======
                  'src/*.js', 
              ],
              examples:{
@@ -21,6 +25,7 @@ module.exports = function(grunt) {
                 ],
                 
             }
+>>>>>>> master
         },
 
         // jhint options, some of the listed are default already buty listed here to be easily edited
@@ -51,6 +56,22 @@ module.exports = function(grunt) {
         CONF: CONF,
         
         pkg: grunt.file.readJSON('package.json'),
+<<<<<<< HEAD
+    
+        // jshint: specify your preferred options in 'globals'
+        // http://jshint.com/docs/options/
+        jshint: {
+            files: ['src/**/*.js'],
+            options: CONF.jshint.options
+        },
+        
+        // copy files
+        copy: {
+            // examples
+            src: {
+                expand: true,
+                cwd: 'src',
+=======
 
         // banner
         meta: {
@@ -83,11 +104,18 @@ module.exports = function(grunt) {
             examples: {
                 expand: true,
                 cwd: 'src/examples',
+>>>>>>> master
                 src: [
                     '**/*.js',
                     '**/*.css',
                     '**/*.html' 
                 ],
+<<<<<<< HEAD
+                dest: ''
+            }
+        },
+        
+=======
                 dest: 'dist/examples'
             }
         },
@@ -118,14 +146,19 @@ module.exports = function(grunt) {
             options: CONF.jshint.options
         },
 
+>>>>>>> master
         // configure watch task
         watch: {
             files: ['<%= jshint.files %>', 'src/**/*.css', 'src/**/*.html'],
             tasks: [
                 'jshint',
+<<<<<<< HEAD
+                'copy'
+=======
                 'concat',
                 'copy',
                 'uglify'
+>>>>>>> master
             ]
         }
 
@@ -136,6 +169,12 @@ module.exports = function(grunt) {
     ////
 
     // requirements
+<<<<<<< HEAD
+    
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+=======
 
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -144,16 +183,22 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+>>>>>>> master
     
     // custom tasks (mind the order of your tasks!), just comment out what you don't need
     grunt.registerTask(
         'default',
         'Compiles all of the assets and copies the files to the build directory.', [
+<<<<<<< HEAD
+            'jshint',
+            'copy'
+=======
             'clean',
             'jshint',
             'concat',
             'copy',
             'uglify'
+>>>>>>> master
         ]
     );
 

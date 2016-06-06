@@ -8,7 +8,9 @@
     
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="./page/flickr.view.css" />
+        
+        <script src="./vendor/handlebars/handlebars.min.js"></script>
         <style type="text/css">
             
             nav.fixed.top {
@@ -18,31 +20,25 @@
                 z-index: 9999;
                 width: 100%;
                 height: auto;
-                background-color: rgb(0, 160, 135);
-                color: white;    
+                background-color: #00a087;
+                color: white;
+                text-align:center;
+                
             }
             .pure-menu-link{
                 color: white;
             }
             .pure-menu-link:hover{
-                background-color: orange;
-            }
-            .pure-menu-heading{
-                text-transform: none;
-                background-color: rgb(25, 25, 25);
+                background-color:transparent;
             }
             body {
                 padding-top: 75px;
             }
             
-            .flickr-items{
-                text-align: center;
-            }
             figure{
                 display:inline-block;
                 animation-name: hello;
                 animation-duration: 2s;
-                margin: 1em;
             }
             figure.bye {
                 transform: scale(0);
@@ -59,21 +55,16 @@
                 to {transform: scale(0);}
             }
         </style>
-        <script src="./flickr-feed.js"></script>
-        <script src="./flickr.livefeed.js"></script>
-        
+        <script src="./flickr.js"></script>
+        <script src="./page/flickr.view.js"></script>
+        <script src="./page/flickr.livefeed.js"></script>
     </head>
 
     <body>
 
         <nav class="pure-menu pure-menu-horizontal fixed top">
-            <a class="pure-menu-link github pure-menu-heading" href="https://github.com/RoboSparrow/FlickrFeeds">
-                <i class="fa fa-github"></i> Github
-            </a>
             <ul class="pure-menu-list">
-                <li class="pure-menu-item">
-                    <span id="Controls" class="pure-menu-link"></span>
-                </li>
+                <li class="pure-menu-item"><span id="Controls" class="pure-menu-link"></span></li>
             </ul>
         </nav>
   
