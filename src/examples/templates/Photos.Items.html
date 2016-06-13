@@ -1,6 +1,6 @@
 <div class="pure-g">
     {{#each items}}
-    <div class="flickr-item pure-u-md-1-4">
+    <div class="flickr-item pure-u-md-1-4 bordered">
         <figure>
             <img class="pure-img" src="{{getImage}}">
             <figcaption>
@@ -11,7 +11,7 @@
                 <br>tags: <em class="tags">{{tags}}</em>
             </figcaption>
         </figure>
-        {{{description}}}
+        <div class="description">{{{description}}}</div>
     </div>
     {{/each}}
 </div>

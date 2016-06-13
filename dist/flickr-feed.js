@@ -1,5 +1,5 @@
 /**
- * FlickrFeeds - v0.0.1 - 2016-06-06
+ * FlickrFeeds - v0.0.1 - 2016-06-14
  * Copyright (c) 2016 
  * Licensed MIT <https://opensource.org/licenses/MIT>
  */

@@ -1,46 +1,70 @@
 /* examples */
 
-body{
-    padding-left: 2em;
-    padding-right: 2em;
+.content{
+    padding-left: .5em;
+    padding-right: .5em;
 }
 
 /* gh-pages */
 
-nav.fixed.top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-    width: 100%;
-    height: auto;
+nav.top {
     background-color: rgb(0, 160, 135);
     color: white;    
 }
-.pure-menu-link{
+nav.top a,
+nav.top .heading{
+    display: inline-block;
+    padding: 10px;
     color: white;
+    font-size: 1.5em;
 }
-.pure-menu-link:hover{
-    background-color: orange;
+nav.top a{
+    text-decoration: none;
+    cursor:pointer;
 }
-.pure-menu-heading{
-    text-transform: none;
+nav.top .toggle-feed-menu{
     background-color: rgb(25, 25, 25);
 }
-body {
-    padding-top: 75px;
+nav.top a:hover{
+    background-color: orange;
 }
+
+nav.top .right{
+    text-align: right;
+}
+
+/* Menu */
+
+#FeedMenu{
+    display: none;
+}
+
+#FeedMenu .section{
+    margin-bottom: 1px;
+    padding: .5em;
+    background-color: #eaeaea;
+}
+
+#FeedMenu .heading{
+    text-transform: uppercase;
+    background-color: #eaeaea;
+}
+#FeedMenu .item{
+    margin-right: .5em;
+}
+
 
 .flickr-items{
     text-align: center;
 }
 figure{
-    display:inline-block;
+    display: inline-block;
     animation-name: hello;
     animation-duration: 2s;
     margin: 1em;
 }
 figure.bye {
+border: 6px solid red;
     transform: scale(0);
     animation-name: bye;
     animation-duration: 1s;
@@ -53,4 +77,33 @@ figure.bye {
 @keyframes bye {
     from {transform: scale(1);}
     to {transform: scale(0);}
+}
+
+.flickr-item .pure-img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flickr-item{
+    padding: 5px;
+    margin: 5px;
+}
+
+.flickr-item.bordered{
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.1);
+}
+
+/* controls */
+
+.flickr-items figure{
+    display: inline-block;
+}
+.flickr-items .description{
+    display: none;
+}
+.description-trigger:checked ~ .flickr-items figure{
+    display: none;
+}
+.description-trigger:checked ~ .flickr-items .description{
+    display: inline-block;
 }

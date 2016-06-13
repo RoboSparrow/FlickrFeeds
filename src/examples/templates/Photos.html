@@ -15,7 +15,7 @@
 {{#if users}}
 <label>
     Users: 
-    <select class="{" data-filter="user">
+    <select class="" data-filter="user">
         <option value="">all</option>
         {{#each users}}
         <option value="{{id}}">{{name}}</option>
@@ -23,5 +23,12 @@
     </select>
 </label>
 {{/if}}
+
+{{#if description}}
+
+    <input class="description-trigger" type="checkbox"> <label>Toggle Descriptions</label>
+
+{{/if}}
+<p></p>
 <div class="flickr-items"></div>
 
