@@ -22,7 +22,7 @@
         init: function(node){
             var self = this;
             App.View.getTemplate(App.BASEPATH + 'templates/LiveFeed.html', {title: "Live Feed"}, function(html){
-                node.insertAdjacentHTML('beforeend', html);
+                node.innerHTML = html;
                 self.nodes.parent = node;
                 self.nodes.counter = node.querySelector('.counter');
                 self.nodes.items = node.querySelector('.flickr-items');
