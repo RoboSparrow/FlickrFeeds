@@ -57,6 +57,9 @@ nav.top .right{
 .flickr-items{
     text-align: center;
 }
+.flickr-photo-comments .flickr-items{
+    text-align: left;
+}
 figure{
     display: inline-block;
     animation-name: hello;
