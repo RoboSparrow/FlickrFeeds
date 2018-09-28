@@ -30,7 +30,7 @@ Returns a list of public content matching some criteria.
 
 * latest 20 uploads
 
-```
+```javascript
 Flickr.Feed().Photos().ready(function(data){
     console.log(data);
 });
@@ -38,7 +38,7 @@ Flickr.Feed().Photos().ready(function(data){
 
 * tagged with either `dogs` or `cats`
 
-```
+```javascript
 // allowed tag formats:
 // 'dogs cats'
 // 'dogs, cats'
@@ -51,7 +51,7 @@ Flickr.Feed().Photos().Tags('dogs, cats').ready(function(data){
 
 * tagged with both `dogs` and `cats`
 
-```
+```javascript
 Flickr.Feed().Photos().Tags('dogs cats', true).ready(function(data){
     console.log(data);
 });
@@ -65,7 +65,7 @@ Flickr.Feed().Photos().Tags('dogs cats', true).ready(function(data){
 
 * latest 20 uploads for a user
 
-```
+```javascript
 Flickr.Feed().User('26912394@N00').Photos().ready(function(data){
     console.log(data);
 }); 
@@ -73,7 +73,7 @@ Flickr.Feed().User('26912394@N00').Photos().ready(function(data){
 
 * with tags, as above
 
-```
+```javascript
 Flickr.Feed().User('26912394@N00').Photos().Tags('adelaide, australia').ready(function(data){
     console.log(data);
 });
@@ -83,7 +83,7 @@ Flickr.Feed().User('26912394@N00').Photos().Tags('adelaide, australia').ready(fu
 
 * latest 20 photos faved by a user
 
-```
+```javascript
 Flickr.Feed().User('26912394@N00').Favourites().ready(function(data){
     console.log(data);
 });
@@ -93,7 +93,7 @@ Flickr.Feed().User('26912394@N00').Favourites().ready(function(data){
 
 * latest 20 photos uploaded by friends of a user
 
-```
+```javascript
 // .Friends(multiple, friends) 
 //      @param{bool} multiple Show multiple items for each contact
 //      @param{bool} friends Show content from only friends and family, excluding contacts
@@ -108,7 +108,7 @@ Flickr.Feed().User('26912394@N00').Friends(true).ready(function(data){
 
 * latest 20 comments made by a user on photos (html content with thumbnail)
 
-```
+```javascript
 Flickr.Feed().User('26912394@N00').Comments().ready(function(data){
     console.log(data);
 });
@@ -119,7 +119,7 @@ Flickr.Feed().User('26912394@N00').Comments().ready(function(data){
 
  * **!!**This feed is deprecated and was closed by Flickr
  
-```
+```javascript
 Flickr.Feed().User('26912394@N00').Activity().ready(function(data){
     Flickr.View.Comments(data, document.body);
 });
@@ -136,7 +136,7 @@ Flickr.Feed().User('26912394@N00').Activity().ready(function(data){
 
 * latest 20 uploads
 
-```
+```javascript
 // allowed tag formats:
 // 'uid1 uid2'
 // 'uid1, uid2'
@@ -161,7 +161,7 @@ Flickr.Feed().Users('26912394@N00, 44494372@N05').Photos().ready(function(data){
 
 * latest 20 uploads
 
-```
+```javascript
 // "In Explore" group
 Flickr.Feed().Group('2389839@N23').Pool().ready(function(data){
     console.log(data);
@@ -172,7 +172,7 @@ Flickr.Feed().Group('2389839@N23').Pool().ready(function(data){
 
 * latest 20 discussion posts (html content)
 
-```
+```javascript
 // "Flickr Central" group
 Flickr.Feed().Group('34427469792@N01').Discussion().ready(function(data){
     console.log(data);
@@ -189,7 +189,7 @@ Flickr.Feed().Group('34427469792@N01').Discussion().ready(function(data){
 
 * latest 20 discussion posts (html content)
 
-```
+```javascript
 Flickr.Feed().Forums().ready(function(data){
     console.log(data);
 });
@@ -203,7 +203,7 @@ Flickr.Feed().Forums().ready(function(data){
 By default the Flickr response objects are decorated with some helper methods before returning it to your callback. (see *Data and DataItem API*)
 If you don't care about these helpers then you can disable this by attaching the `.raw()` modifier to your request.
 
-```
+```javascript
 // disable Data and DataItem API
 Flickr.Feed().Photos().raw().ready(function(data){
     console.log(data); // pure Flickr response
@@ -216,7 +216,7 @@ You can inject data (i.e state values) as objects into the response to have them
 
 This is done by attaching the `.raw(myObject)` modifier which then creates the `injected` holding your stateData inside the response.
 
-```
+```javascript
 // inject state data
 Flickr.Feed().Photos().inject({ start: performance.now() }).ready(function(data){
     var end = performance.now();
@@ -239,7 +239,7 @@ The data properties returned from Flickr remain untouched but you can use these 
 
 Structure of photo stream response with decorators
 
-```
+```javascript
 {
     /**
      * Data API: Filters for Flickr items
@@ -285,7 +285,7 @@ Structure of photo stream response with decorators
 
 ### Handling Filters
 
-```
+```javascript
 Flickr.Feed().Photos().ready(function(data){
    
     // get normalised array with all tags in items
@@ -306,7 +306,7 @@ Flickr.Feed().Photos().ready(function(data){
 
 ### Handling Items
 
-```
+```javascript
 Flickr.Feed().Photos().ready(function(data){
    
     var item = data.items[0];
