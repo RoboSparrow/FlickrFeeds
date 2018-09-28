@@ -135,8 +135,6 @@ module.exports = function(grunt) {
     // grunt tasks
     ////
 
-    // requirements
-
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -145,7 +143,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     
-    // custom tasks (mind the order of your tasks!), just comment out what you don't need
     grunt.registerTask(
         'default',
         'Compiles all of the assets and copies the files to the build directory.', [
@@ -157,4 +154,4 @@ module.exports = function(grunt) {
         ]
     );
 
-}; // end module.exports
+};
