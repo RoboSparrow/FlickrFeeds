@@ -18,8 +18,6 @@ Just grab the `flickr-feed.js` or `flickr-feed.min.js` from [the **dist** folder
 Flickr has an extensive [REST API](https://www.flickr.com/services/api/DZ) but for this you require either oAuth or an api key, which makes it neccessary to pipe your requests through a middleware or proxy.
 Via the public feeds you can access data without the need of a backend.
 
-@TODO: document .raw() and Data/DataItem methods
-
 # Feed API
 
 The Feed API builds your requests
