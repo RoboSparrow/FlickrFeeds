@@ -2,8 +2,6 @@
 
 JS sugar for [Flickr's Public Feeds](https://www.flickr.com/services/feeds/) (JsonP).
 
-Work in progress - use at your own risk.
-
 ## Demo
 
  * http://robosparrow.github.io/FlickrFeeds/
