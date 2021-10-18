@@ -1,7 +1,10 @@
 /* jshint es3: true */
 /* globals  Flickr */
+/* globals  App */
 
-(function(window, Flickr){
+//@TODO quick migrate from old version. needs cleanup
+
+(function(window, Flickr, App){
     
     'use strict';
     
@@ -13,47 +16,25 @@
     var View = {
         nodes: {
             parent: null,
-            container: null,
+            items: null,
             counter: null
         },
-        init: function(contentNode, controlsNode){
-            this.nodes.parent = document.createElement('section');
-            this.nodes.counter = document.createElement('span');
-            this.nodes.counter.textContent = 'fetching...';
-            this.nodes.container = document.createElement('div');   
-            
-            this.nodes.parent.appendChild(this.nodes.container);
-            contentNode.appendChild(this.nodes.parent);
-            controlsNode.appendChild(this.nodes.counter);
-        },
-        addItem: function (item){
-            //console.log(item);
-            var node = document.createElement('figure');
-            var link = document.createElement('a');
-            link.href= item.link;
-            node.appendChild(link);
-            this.nodes.container.appendChild(node);
-            
-            var img = new window.Image();
-            img.src = item.getImage();
-            link.appendChild(img);
-            img.onload = function(){
-                node.className = 'hello';
-            };
+        init: function(node){
+            var self = this;
+            App.View.getTemplate(App.BASEPATH + 'templates/LiveFeed.html', {title: "Live Feed"}, function(html){
+                node.innerHTML = html;
+                self.nodes.parent = node;
+                self.nodes.counter = node.querySelector('.counter');
+                self.nodes.items = node.querySelector('.flickr-items');
+            });
+
         },
         build: function(data){
-            while (this.nodes.container.firstChild) {
-                this.nodes.container.removeChild(this.nodes.container.firstChild);
-            }
-            for(var i = 0; i< data.items.length; i++){
-                this.addItem(data.items[i]);
-            }
-        },
-        unbuild: function(){
-            var items = this.nodes.container.childNodes;
-            for(var i = 0; i < items.length; i++){
-                items[i].className = 'bye';
-            }
+            var self = this;
+            this.nodes.items.innerHTML = '';
+            App.View.getTemplate(App.BASEPATH + 'templates/LiveFeed.Items.html', {title: data.title, items: data.items}, function(html){
+                self.nodes.items.innerHTML = html;
+            });
         }
     };
     
@@ -64,7 +45,7 @@
     
     var clearInterval = function(){ 
         count = 0;
-        View.nodes.counter.textContent = 'fetching...';
+        View.nodes.counter.textContent = 'Fetching feed...';
         if(timer){
             window.clearInterval(timer);
         }
@@ -75,9 +56,14 @@
     };
     
     var doInterval = function(){ 
-
+        
+        // stop when not present in document
+        if(!document.getElementById('FlickrLiveFeedContent')){
+            clearInterval();
+        }
+        
         if(count === (WAIT-1)){
-            View.unbuild();
+            // nothing
         }
         
         if(count >= WAIT){
@@ -85,18 +71,17 @@
             feed.ready(ready);
             return;
         }
-        
+
         count++;           
-        View.nodes.counter.textContent = 'Next: ' + (WAIT - count) +'s';
-        console.log(timer);
+        View.nodes.counter.textContent = 'Next update: ' + (WAIT - count) +'s';
     };
     
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        View.init(document.getElementById('Content'), document.getElementById('Controls'));
-        feed = Flickr.Feed().Photos();
-        feed.ready(ready);
-    });
+    App.LiveFeed = {
+        run: function(content) {
+            View.init(content);
+            feed = Flickr.Feed().Photos();
+            feed.ready(ready);
+        }
+    };
 
-
-})(window, Flickr);
+})(window, Flickr, App);

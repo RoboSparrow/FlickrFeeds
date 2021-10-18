@@ -1,17 +1,17 @@
 <div class="pure-g">
     {{#each items}}
-    <div class="flickr-item pure-u-md-1-4">
+    <div class="flickr-item pure-u-1 pure-u-md-1-4 bordered">
         <figure>
             <img class="pure-img" src="{{getImage}}">
             <figcaption>
                 <a href="{{link}}" target="_blank">{{title}}</a>
                 <br>user: <em class="user">{{#with getUser}}{{name}}{{/with}}</em>
                 <br>taken: <em class="taken">{{#with getDateTaken}}{{toLocaleDateString}}{{/with}}</em>
-                <br>pubished: <em class="taken">{{#with getDatePublished}}{{toLocaleDateString}}{{/with}}</em>            
+                <br>published: <em class="taken">{{#with getDatePublished}}{{toLocaleDateString}}{{/with}}</em>
                 <br>tags: <em class="tags">{{tags}}</em>
             </figcaption>
         </figure>
-        {{{description}}}
+        <div class="description">{{{description}}}</div>
     </div>
     {{/each}}
 </div>

@@ -11,7 +11,7 @@ JS sugar for [Flickr's Public Feeds](https://www.flickr.com/services/feeds/) (Js
 
 Just grab the `flickr-feed.js` or `flickr-feed.min.js` from [the **dist** folder](dist/flickr.js).
 
-## Why Feeds? 
+## Why Feeds?
 
 Flickr has an extensive [REST API](https://www.flickr.com/services/api/DZ) but for this you require either oAuth or an api key, which makes it neccessary to pipe your requests through a middleware or proxy.
 Via the public feeds you can access data without the need of a backend.
@@ -53,7 +53,7 @@ Flickr.Feed().Photos().Tags('dogs cats', true).ready(function(data){
 });
 ```
 
-## User 
+## User
 
 * Helper for getting Flickr user ids: http://idgettr.com/
 
@@ -64,7 +64,7 @@ Flickr.Feed().Photos().Tags('dogs cats', true).ready(function(data){
 ```javascript
 Flickr.Feed().User('26912394@N00').Photos().ready(function(data){
     console.log(data);
-}); 
+});
 ```
 
 * with tags, as above
@@ -90,14 +90,14 @@ Flickr.Feed().User('26912394@N00').Favourites().ready(function(data){
 * latest 20 photos uploaded by friends of a user
 
 ```javascript
-// .Friends(multiple, friends) 
+// .Friends(multiple, friends)
 //      @param{bool} multiple Show multiple items for each contact
 //      @param{bool} friends Show content from only friends and family, excluding contacts
 
 Flickr.Feed().User('26912394@N00').Friends(true).ready(function(data){
     console.log(data);
 });
- 
+
 ```
 
 ### Users'comments
@@ -108,13 +108,13 @@ Flickr.Feed().User('26912394@N00').Friends(true).ready(function(data){
 Flickr.Feed().User('26912394@N00').Comments().ready(function(data){
     console.log(data);
 });
- 
+
 ```
 
 ## Activity
 
  * **!!**This feed is deprecated and was closed by Flickr
- 
+
 ```javascript
 Flickr.Feed().User('26912394@N00').Activity().ready(function(data){
     Flickr.View.Comments(data, document.body);
@@ -141,7 +141,7 @@ Flickr.Feed().User('26912394@N00').Activity().ready(function(data){
 // latest uploads for The British Library and Nasa (Commons)
 Flickr.Feed().Users('26912394@N00, 44494372@N05').Photos().ready(function(data){
     console.log(data);
-}); 
+});
 ```
 
 * allows tags, as above
@@ -172,7 +172,7 @@ Flickr.Feed().Group('2389839@N23').Pool().ready(function(data){
 // "Flickr Central" group
 Flickr.Feed().Group('34427469792@N01').Discussion().ready(function(data){
     console.log(data);
-}); 
+});
 ```
 
 ---
@@ -227,11 +227,11 @@ Injection also works with the `.raw()` modifier set (for debugging).
 
 The Data and DataItem API provides some convenience methods for handling the Flickr response object.
 
-The data properties returned from Flickr remain untouched but you can use these methods to filter and parse result properties. 
+The data properties returned from Flickr remain untouched but you can use these methods to filter and parse result properties.
 
 * Note: if you don't care about these helpers then you can disable this by attaching the `.raw()` modifier to your request.
 
-## Example 
+## Example
 
 Structure of photo stream response with decorators
 
@@ -243,7 +243,7 @@ Structure of photo stream response with decorators
      * this.getTags()
      * this.getUsers()
      */
-     
+
     "title": "<title>",
     "link": "<url>",
     "description": "<text>",
@@ -251,7 +251,7 @@ Structure of photo stream response with decorators
     "generator": "http://www.flickr.com/",
     "items": [
         {
-            
+
             /**
              * DataItem API: Helpers for item values
              *
@@ -262,20 +262,20 @@ Structure of photo stream response with decorators
              * this.getTags()
              * this.getUser()
              */
-             
-			"title": "<title>",
-			"link": "<url>",
-			"media": {"m":"<url>"},
-			"date_taken":  "<iso-date>",
+
+            "title": "<title>",
+            "link": "<url>",
+            "media": {"m":"<url>"},
+            "date_taken":  "<iso-date>",
             "published": "<iso-date>"
-			"description": "<description-html>",
-			"author": "nobody@flickr.com (<user-name>)",
-			"author_id": "<user-id>",
-			"tags": "<whitespace separated tagnames>"
+            "description": "<description-html>",
+            "author": "nobody@flickr.com (<user-name>)",
+            "author_id": "<user-id>",
+            "tags": "<whitespace separated tagnames>"
         },
         // ...more items...
     ]
-    
+
 }
 ```
 
@@ -283,17 +283,17 @@ Structure of photo stream response with decorators
 
 ```javascript
 Flickr.Feed().Photos().ready(function(data){
-   
+
     // get normalised array with all tags in items
     var allTags = data.getTags();
-    
+
     // get filtered array of items for specific tags
     // we assume that allTags contained the tags 'dog' and 'cat'
     var dogs = data.getItemsByTag('dog');
     var dogsCats =  data.getItemsByTag(['dog', 'cat']);
     var dogsCats =  data.getItemsByTag('dog cat');
     var dogsCats =  data.getItemsByTag('dog, cat');
-    
+
     // get normalised array with all users in items
     var users = data.getUsers();
 
@@ -304,29 +304,27 @@ Flickr.Feed().Photos().ready(function(data){
 
 ```javascript
 Flickr.Feed().Photos().ready(function(data){
-   
+
     var item = data.items[0];
-    
+
     // return item.published as JS Date object
     var date = item.getDatePublished();
-    
+
     // return item.date_taken as JS Date object
     var date = item.getDateTaken();
-    
+
     // return item image url
     var imageUrl = item.getImage();
-        
+
     // return tags length
     var numberOfTags = item.hasTags();
     // or:
     if(item.hasTags()){
         //do something...
     }
-    
+
     // return tags as array
     var tags = item.getTags();
-    
+
 });
 ```
-
-

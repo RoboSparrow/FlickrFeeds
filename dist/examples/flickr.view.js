@@ -1,11 +1,12 @@
 /* jshint es3: true */
-/* globals Flickr */
+/* globals App */
 /* globals Handlebars */
+/* globals App.BASEPATH */
 
-(function(window, Flickr, Handlebars){
+(function(window, App, Handlebars){
     
     'use strict';
-
+    
     var filters = {
         tags: function(items, search){
             return items.filter(function(item){
@@ -40,7 +41,7 @@
                 var search = e.target.value;
                 items = (search) ? filters[filter](data.items, search) : data.items;
 
-                View.getTemplate('./templates/Photos.Items.html', {items: items}, function(html){                
+                View.getTemplate(App.BASEPATH + 'templates/Photos.Items.html', {items: items}, function(html){                
                     photos.innerHTML = html;
                 });
             });
@@ -81,15 +82,17 @@
         data: [],
         
         build: function(node){
-           View.getTemplate('./templates/Menu.html', {data: this.data}, function(html){
+           View.getTemplate(App.BASEPATH + 'templates/Menu.html', {data: this.data}, function(html){
                 node.innerHTML = html;
             });
         },
         
-        section: function(title){
+        section: function(hash, title){
             var section = {
+                hash: hash,
                 title: title,
-                items: []
+                items: [],
+                index: this.data.length
             };
             this.data.push(section);
             return section;
@@ -124,9 +127,12 @@
     View.Photos = function(data, parent, options){
         var self = this;
         
+        console.log(data);
+    
         options = options || {};
         options.filters = options.filters || [];
         
+        var context = options.context || null;
         var node = document.createElement('div');
         node.className = 'flickr-photo-grid';
         
@@ -136,13 +142,14 @@
         var photosData = {
             data: data,
             tags: (options.filters.indexOf('tags') > -1) ? data.getTags() : false,
-            users: (options.filters.indexOf('user') > -1) ? data.getUsers() : false
+            users: (options.filters.indexOf('user') > -1) ? data.getUsers() : false,
+            description: (options.filters.indexOf('description') > -1)
         };
         
-        this.getTemplate('./templates/Photos.html', photosData, function(html){
+        this.getTemplate(App.BASEPATH + 'templates/Photos.html', photosData, function(html){
             node.insertAdjacentHTML('beforeend', html);
             
-            self.getTemplate('./templates/Photos.Items.html', {items: data.items}, function(html){
+            self.getTemplate(App.BASEPATH + 'templates/Photos.Items.html', {items: data.items}, function(html){
                 var itemsNode = node.querySelector('.flickr-items');
                 itemsNode.innerHTML = html;
                 View.filterHandler(data, node);
@@ -153,7 +160,9 @@
     
     View.Comments = function(data, parent, options){
         var self = this;
-        
+
+        console.log(data);
+                
         options = options || {};
         options.filters = options.filters || [];
         
@@ -170,10 +179,10 @@
             users: (options.filters.indexOf('user') > -1) ? data.getUsers() : false
         };
         
-        this.getTemplate('./templates/Comments.html', commentsData, function(html){
+        this.getTemplate(App.BASEPATH + 'templates/Comments.html', commentsData, function(html){
             node.insertAdjacentHTML('beforeend', html);
             
-            self.getTemplate('./templates/Comments.Items.html', {items: data.items}, function(html){
+            self.getTemplate(App.BASEPATH + 'templates/Comments.Items.html', {items: data.items}, function(html){
                 var itemsNode = node.querySelector('.flickr-items');
                 itemsNode.innerHTML = html;
                 View.filterHandler(data, node);
@@ -187,6 +196,6 @@
         parent.innerHTML = '<em>loading...</em>';
     };
  
-    Flickr.View = View;
+    App.View = View;
 
-})(window, Flickr, Handlebars);
+})(window, App, Handlebars);
