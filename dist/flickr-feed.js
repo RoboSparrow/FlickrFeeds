@@ -31,7 +31,7 @@
             if(state.inject){
                     data.injected = state.inject;
             }
-            fn((state.raw) ? data : new Data(data));  
+            fn((state.raw) ? data : new Data(data));
             document.head.removeChild(script);
         };
         callbacks.push(callback);
@@ -272,7 +272,7 @@
         options = options || false;
         // public
         if(!this.id){
-            this.register('http://api.flickr.com/services/feeds/photos_public.gne');
+            this.register('https://api.flickr.com/services/feeds/photos_public.gne');
         }
         this.options(options);
         return this;
